@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0d0d0d;
+      color: #ffffff;
+      scroll-behavior: smooth;
+    }
+
+    nav {
+      width: 100%;
+      padding: 15px 40px;
+      background: rgba(13, 13, 13, 0.85);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-sizing: border-box;
+    }
+
+    .logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: #1aebe0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .logo .subtitle {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 400;
+      letter-spacing: 2px;
+    }
+
+    .nav-links-desktop {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-family: 'Outfit', sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Premium Shine & Hover */
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      transition: 0.5s;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+      background: rgba(10, 230, 238, 0.1);
+      transform: translateY(-3px);
+    }
+
+    /* Ultimate Active State */
+    nav a.active,
+    nav a[href="#home"]:active {
+      color: #0d0d0d !important;
+      background: #1aebe0 !important;
+      box-shadow: 0 0 20px rgba(26, 235, 224, 0.6);
+      transform: translateY(0) scale(1.05);
+    }
+
+    /* Hamburger Menu Styles */
+    .menu-toggle,
+    .nav-links {
+      display: none;
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: #1aebe0;
+      margin: 5px 0;
+      transition: 0.3s;
+      border-radius: 3px;
+    }
+
+    /* Decorative indicator for active/hover */
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: #1aebe0;
+      transition: 0.3s;
+      transform: translateX(-50%);
+    }
+
+    nav a.active::after,
+    nav a:hover::after {
+      width: 40%;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px 40px;
+      height: 60vh;
+      /* Stronger dark overlay for better text contrast */
+      background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("portfiloo web image.jpg");
+      background-size: cover;
+      background-position: center;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    /* LEFT SIDE TEXT */
+    .hero-left h1 {
+      font-size: 55px;
+      font-weight: 800;
+      color: #0ae6ee;
+      /* Vibrant Cyan */
+      max-width: 600px;
+      font-family: 'Outfit', sans-serif;
+      text-shadow: 0 0 15px rgba(10, 230, 238, 0.4);
+      line-height: 1.2;
+    }
+
+    .cursor {
+      color: #f3ef06;
+      /* Neon Yellow/Gold cursor */
+      font-weight: 900;
+    }
+
+    /* RIGHT SIDE IMAGE */
+    .hero-right img {
+      height: 600px;
+      object-fit: cover;
+      padding-top: 1cm;
+      padding-bottom: 1.9cm;
+      padding-left: 9cm;
+      position: relative;
+      z-index: 2;
+      animation: moveLeftRight 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes moveLeftRight {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-40px);
+      }
+
+      75% {
+        transform: translateX(40px);
+      }
+    }
+
+    .section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+      animation: fadeIn 1.5s ease-in-out;
+      color: #80ceeb;
+      border-radius: 5cm;
+    }
+
+    .section h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      border-left: 5px solid #922121;
+      padding-left: 10px;
+      border-radius: 2cm;
+    }
+
+    .skills-list span {
+      display: inline-block;
+      background: #1f1f1f;
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin: 5px;
+      font-size: 16px;
+      border: 1px solid #333;
+      transition: 0.3s;
+    }
+
+    .skills-list span:hover {
+      transform: scale(1.1);
+      background: #2d2d2d;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #333;
+      transition: 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 15px #222;
+    }
+
+    .project-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .contact-wrapper {
+      background: linear-gradient(rgba(13, 13, 13, 0.7), rgba(13, 13, 13, 0.7)), url('contact.bg.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      padding-top: 50px;
+      margin-top: 0;
+    }
+
+    .contact {
+      background: rgba(13, 13, 13, 0.4);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #0ae6ee;
+      border-radius: 30px;
+      padding: 50px 40px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      transition: all 0.4s ease;
+    }
+
+    .contact:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 60px rgba(26, 235, 224, 0.2);
+    }
+
+    .contact input,
+    .contact textarea {
+      width: 100%;
+      padding: 15px;
+      margin: 12px 0;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(25, 24, 24, 0.8);
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .contact input:focus,
+    .contact textarea:focus {
+      outline: none;
+      border-color: #1aebe0;
+      background: rgba(30, 30, 30, 1);
+      box-shadow: 0 0 15px rgba(26, 235, 224, 0.2);
+    }
+
+    .contact button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      background: linear-gradient(135deg, #000000, #2a05ff);
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 5px 15px rgba(26, 235, 224, 0.3);
+    }
+
+    .contact button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(26, 235, 224, 0.5);
+      filter: brightness(1.1);
+    }
+
+    .contact button:active {
+      transform: scale(0.98);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      margin-top: 40px;
+      color: #777;
+    }
+
+    /* --- ADVANCED RESPONSIVENESS --- */
+    @media (max-width: 1024px) {
+      .hamburger {
+        display: block;
+        margin-left: auto;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 65px;
+        /* Floating below nav */
+        right: 25px;
+        width: 180px;
+        /* Small corner portion */
+        background: rgba(13, 13, 13, 0.98);
+        flex-direction: column;
+        padding: 10px 0;
+        border: 1px solid rgba(26, 235, 224, 0.3);
+        border-radius: 15px;
+        backdrop-filter: blur(30px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+        overflow: hidden;
+        z-index: 1000;
+      }
+
+      .menu-toggle:checked~.nav-links {
+        display: flex;
+      }
+
+      .menu-toggle:checked+.hamburger span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+      }
+
+      .menu-toggle:checked+.hamburger span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle:checked+.hamburger span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
+      }
+
+      .hero {
+        padding: 80px 0 20px;
+        /* Spacing for fixed nav and bottom */
+        height: auto;
+        min-height: 85vh;
+        flex-direction: column;
+        justify-content: flex-end;
+        /* PUSH TEXT TO BOTTOM near line */
+        text-align: center;
+        margin-bottom: 0;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('my own pic.png');
+        background-size: cover;
+        background-position: center;
+      }
+
+      .hero-left h1 {
+        font-size: 52px;
+        /* Even bigger text */
+        margin-top: 0;
+        margin-bottom: 40px;
+        /* Space from the white line */
+        max-width: 100%;
+        padding: 0 15px;
+        text-shadow: 0 0 25px rgba(26, 235, 224, 0.7);
+        letter-spacing: -1px;
+      }
+
+      .logo {
+        font-size: 18px;
+        font-weight: 900;
+      }
+
+      .logo .subtitle {
+        font-size: 9px;
+      }
+
+      .nav-links-desktop {
+        display: none;
+        /* Hide desktop links on mobile */
+      }
+
+      .hero-right {
+        display: none;
+        /* Removed the foreground pic on mobile as requested */
+      }
+
+      @keyframes moveRight {
+        0% {
+          left: 0;
+        }
+
+        50% {
+          left: 20px;
+        }
+
+        100% {
+          left: 0;
+        }
+      }
+
+      nav {
+        padding: 15px 25px;
+        justify-content: space-between;
+        background: rgba(13, 13, 13, 0.95);
+      }
+
+      .nav-links a {
+        font-size: 13px;
+        padding: 15px 20px;
+        width: 100%;
+        text-align: left;
+        /* More professional for small menu */
+        background: transparent;
+        border: none;
+        color: rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+      }
+
+      .nav-links a:hover {
+        background: rgba(26, 235, 224, 0.1);
+        color: #1aebe0 !important;
+        padding-left: 25px;
+        /* Small slide effect on hover */
+      }
+
+      .nav-links a.active {
+        background: #1aebe0 !important;
+        color: #0d0d0d !important;
+        font-weight: 700;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-left h1 {
+        font-size: 38px;
+        /* Bigger for small phones */
+        margin-top: 0;
+        margin-bottom: 30px;
+        /* Close to white line */
+      }
+
+      nav {
+        padding: 15px 15px;
+      }
+
+      nav {
+        gap: 5px;
+      }
+
+      nav a {
+        font-size: 10px;
+        padding: 7px 10px;
+        letter-spacing: 0.5px;
+      }
+
+      .contact {
+        padding: 30px 15px;
+      }
+
+      .contact-wrapper {
+        padding-top: 30px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-links-desktop">
+      <a href="#home" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="project.html">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div class="logo">
+      Arman
+      <span class="subtitle">Web Developer</span>
+    </div>
+
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+    <div class="nav-links">
+      <a href="#home" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="project.html">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Home Section -->
+  <section class="hero" id="home">
+    <div class="hero-left">
+      <h1>
+        <span id="typed-text"></span><span class="cursor">|</span>
+      </h1>
+    </div>
+
+    <div class="hero-right">
+      <img src="my own pic.png" alt="My Picture">
+    </div>
+  </section>
+  <hr>
+
+  <div class="contact-wrapper">
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+      <h2>Contact Me</h2>
+
+      <form action="https://formspree.io/f/xgvqyeon" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+
+        <input type="email" name="email" placeholder="Enter your Own Email" required>
+
+        <textarea name="message" placeholder="Your Message" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      © 2025 My Portfolio — All Rights Reserved
+    </footer>
+  </div>
+
+  <script>
+    const texts = [
+      "Hello, I'm Arman",
+      "Forntend Web Developer",
+      "Full-Stack Web Architect",
+      "React.js Development Specialist",
+      "Node.js & Backend Expert",
+      "Professional Django Developer",
+      "Creative AI Digital Artist",
+      "I can create the best website for your needs"
+    ];
+
+    let currentText = 0;
+    let charIndex = 0;
+    const typedText = document.getElementById("typed-text");
+
+    function type() {
+      if (charIndex < texts[currentText].length) {
+        typedText.textContent += texts[currentText].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, 90);
+      } else {
+        setTimeout(deleteText, 1500);
+      }
+    }
+
+    function deleteText() {
+      if (charIndex > 0) {
+        typedText.textContent = texts[currentText].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(deleteText, 50);
+      } else {
+        currentText = (currentText + 1) % texts.length;
+        setTimeout(type, 90);
+      }
+    }
+
+    type();
+  </script>
+
+</body>
+
+</html>
